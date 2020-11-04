@@ -1,7 +1,7 @@
 import lyricsgenius, re, pyperclip
-from config import api_key
+from config import genius_api_key
 
-genius = lyricsgenius.Genius(api_key)
+genius = lyricsgenius.Genius(genius_api_key)
 
 def get_lyrics_list(song_title):
     lyrics = genius.search_song(song_title).lyrics
