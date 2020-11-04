@@ -25,13 +25,17 @@ def get_plst_by_name(name, author):
     if not found:
         print("Couldn't find playlist. Try searching by link instead.")
 
-def main():
-    playlist_id = get_plst_by_link('https://open.spotify.com/playlist/1BaY2hW7IKZt6ZJYIceSoJ?si=ibY5QL3qR12HL9q3mh0zLQ')
+def get_playlist_songs(playlist_id):
+    song_dict = {}
     playlist = sp.playlist(playlist_id)
-    # with open('test.py', 'w') as f:
-    #     f.write(pprint.pformat(playlist['tracks']['items']))
-    print(playlist['tracks']['items'][0]['track']['name'])
-    
+    for song in playlist['tracks']['items']:
+        song_dict.update({ song['track']['name']: {'artist': song['track']['artists'][0]['name']}})
+    return song_dict
+
+def get_song_dict(link):
+    playlist_id = get_plst_by_link(link)
+    song_list = get_playlist_songs(playlist_id)
+    return song_list 
 
 if __name__ == "__main__":
-    main()
+    print(get_song_dict('https://open.spotify.com/playlist/4zBVGR3eBYD1UcL24ytABt?si=JFl3NkkbTaWhVMOINJ85AQ'))
