@@ -1,6 +1,5 @@
 from sp_playlist import get_song_dict
 from lyrics import get_lyrics_trans
-from translate import translate_verse
 import time, pprint, csv
 
 def write_csv(data, filename='test'):
@@ -8,6 +7,7 @@ def write_csv(data, filename='test'):
         writer = csv.writer(csvfile)
         for track in data.keys():
             writer.writerow([' ', ' '])
+            writer.writerow([track, ' '])
             if data[track]['lyrics']:
                 for verse, trans in data[track]['lyrics'].items():
                     row = [verse, trans]
