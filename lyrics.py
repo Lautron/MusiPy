@@ -1,5 +1,6 @@
 import lyricsgenius, re, pyperclip, pprint, csv
 from config import genius_api_key
+from translate import translate_verse
 
 genius = lyricsgenius.Genius(genius_api_key)
 
@@ -23,7 +24,9 @@ def get_lyrics_trans(song_title, author, trans_lang='es'):
         res = dict(zip(lyrics[0], lyrics[1]))
     else:
         #TODO handle translation not available on GENIUS
-        return None
+        lyrics = lyrics[0]
+        print('\nTranslating song...')
+        res = {translate_verse(verse): verse for verse in lyrics}
 
     with open('test.py', 'w') as f:
         f.write(pprint.pformat(res))
