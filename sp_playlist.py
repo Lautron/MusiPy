@@ -34,8 +34,8 @@ def get_playlist_songs(playlist_id):
 
 def get_song_dict(link):
     playlist_id = get_plst_by_link(link)
-    song_list = get_playlist_songs(playlist_id)
-    return song_list 
+    song_dict = get_playlist_songs(playlist_id)
+    return song_dict 
 
 if __name__ == "__main__":
     print(get_song_dict('https://open.spotify.com/playlist/4zBVGR3eBYD1UcL24ytABt?si=JFl3NkkbTaWhVMOINJ85AQ'))
