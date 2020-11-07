@@ -1,8 +1,10 @@
-import lyricsgenius, re, pyperclip, pprint, csv
+import lyricsgenius, re, pyperclip, pprint, csv, time
 from config import genius_api_key
 from translate import translate_verse
+from googletrans import Translator
 
 genius = lyricsgenius.Genius(genius_api_key)
+trans = Translator()
 
 def get_lyrics_list(song_title, author):
     try:
@@ -20,17 +22,17 @@ def get_lyrics_trans(song_title, author, trans_lang='es'):
     }
     songs = [song_title, song_title + lang_dict[trans_lang]]
     lyrics = [get_lyrics_list(song, author) for song in songs]
-    if lyrics[1]:
+    # [print(len(i)) for i in lyrics if i]
+    if lyrics[1] and len(lyrics[0]) == len(lyrics[1]):
         res = dict(zip(lyrics[0], lyrics[1]))
     else:
-        #TODO handle translation not available on GENIUS
         lyrics = lyrics[0]
         print('\nTranslating song...')
-        res = {translate_verse(verse): verse for verse in lyrics}
+        res = {verse: translate_verse(verse, trans) for verse in lyrics}
 
     with open('test.py', 'w') as f:
         f.write(pprint.pformat(res))
     return res
 
 if __name__ == "__main__":
-    print(get_lyrics_trans("PUPPE", 'Rammstein', trans_lang='es'))
+    print(get_lyrics_trans("AUSLÄNDER", 'Rammstein', trans_lang='es'))
