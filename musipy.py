@@ -13,24 +13,27 @@ def write_csv(data, filename='test'):
                     row = [verse, trans]
                     writer.writerow(row)
 
-def musipy():
-    link = input('Paste playlist URL...\n')
+def musipy(link=''):
+    if not link:
+        link = input('Paste playlist URL...\n')
+
     song_dict = get_song_dict(link)
     song_vocab_dict = {}
     start = time.time()
     for song in song_dict.keys():
-        verse_list = get_lyrics_trans(song, song_dict[song]['artist'])
+        verse_dict = get_lyrics_trans(song, song_dict[song]['artist'])
         song_vocab_dict.update({
-            song: {'lyrics': verse_list,
+            song: {'lyrics': verse_dict,
                     'artist': song_dict[song]['artist']}
                 })
 
     with open('test.py', 'w') as f:
-        f.write(pprint.pformat(song_vocab_dict))
+        f.write('test_dict = ' + pprint.pformat(song_vocab_dict))
 
     write_csv(song_vocab_dict)
-    print(f'The program took {time.time() - start} seconds\n')
+    ex_time = time.time() - start
+    print(f'The program took {ex_time} seconds\n{ex_time // len(song_vocab_dict)} seconds per song')
     
 if __name__ == "__main__":
-    musipy()
+    musipy('https://open.spotify.com/playlist/7gw9ny2d3Gzka2ag550fbo?si=gIq37QHkTny2sKmtRlepOQ')
 
