@@ -7,4 +7,6 @@ It currently supports Spanish translations. Support for more languages will be a
 * Turn the script into a Flask API and create the front-end using React.
 * Create a flashcard system on the website to avoid depending on third party apps.
 * Enhance the script time perfomance or use a DB to store previously searched songs to provide a better user experience.
+## TODO
+Give the repo a package structure to facilitate instalation
 
