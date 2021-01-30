@@ -1,10 +1,10 @@
-import lyricsgenius, re, pyperclip, pprint, csv, time
+import lyricsgenius, re, pprint, csv, time
 from config import genius_api_key
 from translate import translate_verse
-from googletrans import Translator
+from google_trans_new import google_translator
 
 genius = lyricsgenius.Genius(genius_api_key)
-trans = Translator()
+trans = google_translator()
 
 def get_lyrics_list(song_title, author):
     try:
