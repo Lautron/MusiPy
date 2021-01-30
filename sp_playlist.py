@@ -1,4 +1,4 @@
-import spotipy, pprint, re, pyperclip
+import spotipy, pprint, re
 from spotipy.oauth2 import SpotifyClientCredentials
 from config import sp_id, sp_secret
 
