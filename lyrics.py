@@ -2,7 +2,9 @@ import lyricsgenius, re, pprint, csv, time
 from config import genius_api_key
 from translate import translate_verse
 from google_trans_new import google_translator
+from multiprocessing.dummy import Pool as ThreadPool
 
+pool = ThreadPool(8)
 genius = lyricsgenius.Genius(genius_api_key)
 trans = google_translator()
 
@@ -23,13 +25,13 @@ def get_lyrics_trans(song_title, author, trans_lang='es'):
     songs = [song_title, song_title + lang_dict[trans_lang]]
     lyrics = [get_lyrics_list(song, author) for song in songs]
     # [print(len(i)) for i in lyrics if i]
-    if lyrics[1] and len(lyrics[0]) == len(lyrics[1]):
-        res = dict(zip(lyrics[0], lyrics[1]))
-    else:
-        lyrics = lyrics[0]
+    if not lyrics[1] or not len(lyrics[0]) == len(lyrics[1]):
         print('\nTranslating song...')
-        res = {verse: translate_verse(verse, trans) for verse in lyrics}
+        lyrics[1] = pool.map(translate_verse, lyrics[0])
+        
+        # res = {verse: translate_verse(verse, trans) for verse in lyrics}
 
+    res = dict(zip(lyrics[0], lyrics[1]))
     with open('test.py', 'w') as f:
         f.write(pprint.pformat(res))
     return res
