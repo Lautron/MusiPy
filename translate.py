@@ -1,11 +1,13 @@
-from googletrans import Translator
+from google_trans_new import google_translator
 import time
 
 def translate_verse(verse, trans, desti='es'):
     translation = None
     while translation == None:
+
+        translation = trans.translate(verse, lang_tgt=desti)
         try:
-            translation = trans.translate(verse, dest=desti)
+            pass
         except Exception as e:
             #TODO find a better way to translate verses
             print(f'\nVerse: {verse}\nException: {e}')
@@ -14,4 +16,4 @@ def translate_verse(verse, trans, desti='es'):
             # time.sleep(0.5)
             # pass
 
-    return translation.text
+    return translation
