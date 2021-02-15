@@ -35,5 +35,5 @@ def musipy(link=''):
     print(f'The program took {ex_time} seconds\n{ex_time // len(song_vocab_dict)} seconds per song')
     
 if __name__ == "__main__":
-    musipy('https://open.spotify.com/playlist/7gw9ny2d3Gzka2ag550fbo?si=gIq37QHkTny2sKmtRlepOQ')
+    musipy('https://open.spotify.com/playlist/7gw9ny2d3Gzka2ag550fbo?si=5Apb9fJ1TV23yk44_Vf-8Q')
 
