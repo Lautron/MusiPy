@@ -31,7 +31,7 @@ def make_anki_deck(name, song_dict):
             my_deck.add_note(my_note)
         decks.append(my_deck)
     print('Writing package...')
-    genanki.Package(decks).write_to_file('Songs.apkg')
+    genanki.Package(decks).write_to_file(f'{name.replace(" ", "-")}.apkg')
     print('Done')
 
 if __name__ == "__main__":
