@@ -18,9 +18,10 @@ def get_lyrics_list(song_title, author):
     lyrics_list = cleaned_lyrics.split('\n')
     return [verse.strip() for verse in lyrics_list if verse]
 
-def get_lyrics_trans(song_title, author, trans_lang='es'):
+def get_lyrics_trans(song_title, author, trans_lang='en'):
     lang_dict = {
-        'es': ' (traducción al español)'
+        'es': ' (traducción al español)',
+        'en': ' (english translation)'
     }
     songs = [song_title, song_title + lang_dict[trans_lang]]
     lyrics = [get_lyrics_list(song, author) for song in songs]
@@ -37,4 +38,4 @@ def get_lyrics_trans(song_title, author, trans_lang='es'):
     return res
 
 if __name__ == "__main__":
-    print(get_lyrics_trans("AUSLÄNDER", 'Rammstein', trans_lang='es'))
+    print(get_lyrics_trans("AUSLÄNDER", 'Rammstein', trans_lang='en'))
