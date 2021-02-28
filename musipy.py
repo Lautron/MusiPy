@@ -3,7 +3,7 @@ from lyrics import get_lyrics_trans
 import time, pprint, csv
 
 def write_csv(data, filename='test'):
-    with open(f'{filename}.csv', 'a', encoding='utf-8') as csvfile:
+    with open(f'{filename}.csv', 'w', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         for track in data.keys():
             writer.writerow([' ', ' '])
@@ -20,7 +20,9 @@ def musipy(link=''):
     song_dict = get_song_dict(link)
     song_vocab_dict = {}
     start = time.time()
+    
     for song in song_dict.keys():
+
         verse_dict = get_lyrics_trans(song, song_dict[song]['artist'])
         song_vocab_dict.update({
             song: {'lyrics': verse_dict,
@@ -32,8 +34,8 @@ def musipy(link=''):
 
     write_csv(song_vocab_dict)
     ex_time = time.time() - start
-    print(f'The program took {ex_time} seconds\n{ex_time // len(song_vocab_dict)} seconds per song')
+    print(f'The program took {ex_time} seconds\n{ex_time // len(song_vocab_dict) if len(song_vocab_dict) != 0 else 1} seconds per song')
     
 if __name__ == "__main__":
-    musipy('https://open.spotify.com/playlist/7gw9ny2d3Gzka2ag550fbo?si=5Apb9fJ1TV23yk44_Vf-8Q')
-
+#    musipy('https://open.spotify.com/playlist/7gw9ny2d3Gzka2ag550fbo?si=5Apb9fJ1TV23yk44_Vf-8Q')
+    musipy('https://open.spotify.com/playlist/3CcjMBtV0BtYuvL0bRAXLm?si=FxKMCt1XRMmnte-FB05Mmw')
