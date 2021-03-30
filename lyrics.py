@@ -25,7 +25,9 @@ def get_lyrics_trans(song_title, author, trans_lang='en'):
     }
     songs = [song_title, song_title + lang_dict[trans_lang]]
     lyrics = [get_lyrics_list(song, author) for song in songs]
-    # [print(len(i)) for i in lyrics if i]
+    if not lyrics[0]:
+        print(f'No lyrics found for "{song_title}"\n')
+        return None
     if not lyrics[1] or not len(lyrics[0]) == len(lyrics[1]):
         print('\nTranslating song...')
         lyrics[1] = pool.map(translate_verse, lyrics[0])
