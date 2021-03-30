@@ -24,6 +24,8 @@ def musipy(link=''):
     for song in song_dict.keys():
 
         verse_dict = get_lyrics_trans(song, song_dict[song]['artist'])
+        if not verse_dict:
+            continue
         song_vocab_dict.update({
             song: {'lyrics': verse_dict,
                     'artist': song_dict[song]['artist']}
@@ -38,4 +40,4 @@ def musipy(link=''):
     
 if __name__ == "__main__":
 #    musipy('https://open.spotify.com/playlist/7gw9ny2d3Gzka2ag550fbo?si=5Apb9fJ1TV23yk44_Vf-8Q')
-    musipy('https://open.spotify.com/playlist/3CcjMBtV0BtYuvL0bRAXLm?si=FxKMCt1XRMmnte-FB05Mmw')
+    musipy()
